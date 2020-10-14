@@ -167,8 +167,13 @@ class Suffix():
 
     def __rsub__(self, other):
         if isinstance(other, Word):
-            stem = other.underlying + "-" + self.process(other.underlying)
-            gloss = other.gloss + "-" + self.gloss
+            affix = self.process(other.underlying)
+            if affix:
+                stem = other.underlying + "-" + affix
+                gloss = other.gloss + "-" + self.gloss
+            else:
+                stem = other.underlying
+                gloss = other.gloss + "." + self.gloss
             w = Word(stem, gloss)
             w.sources = other.sources
             w.citationform = other.citationform

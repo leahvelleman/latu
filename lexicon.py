@@ -1,10 +1,10 @@
 from grammar import Word, Noun, Verb, Adjective, Suffix
 
-V = "aeiouy:"
 class lexicon():
     time = Noun("let", "time")
     day = Noun("iku", "day")
     daytime = Noun(time+day, "daytime")
+
 
     sit = Verb("hehde", "sit")
     clawCL = Noun("ka", "claw.CL")
@@ -47,28 +47,6 @@ class lexicon():
     fire = Noun("ah", "fire")
     foot = Noun("We7", "foot")
 
-    IMP = Suffix.fixed("ku7", "IMP")
-    def INDICify(stem):
-        if stem[-1] in V:
-            return ""
-        else:
-            return "a"
-    INDIC = Suffix.variable(INDICify, "INDIC")
-    PSUBJ = Suffix.fixed("sa", "POS.SUBJ")
-    NSUBJ = Suffix.fixed("si", "POS.SUBJ")
-    CON = Suffix.fixed("i", "CON")
-    def INDEFify(stem):
-        if stem[-1] in V:
-            return ""
-        else:
-            return "a"
-    INDEF = Suffix.variable(INDEFify, "INDEF")
-    def DEFify(stem):
-        if stem[-1] in V:
-            return "7"
-        else:
-            return "iu:"
-    DEF = Suffix.variable(DEFify, "DEF")
 
 lex = {k: getattr(lexicon, k) for k in dir(lexicon) if
         isinstance(getattr(lexicon, k), Word)}

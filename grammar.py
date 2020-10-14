@@ -1,3 +1,5 @@
+
+V = "aeiouy:"
 allophony = [("+", ""), 
              ("-", ""), 
              ("ti", "tSi"),
@@ -56,33 +58,53 @@ class Word():
     def __init__(self, *args):
         if len(args) == 2 and isinstance(args[0], Word):
             self.underlying = args[0].underlying
+            self.sources = [source for source in args[0].sources]
             self.gloss = args[1]
+            self.citationform = self
         elif len(args) == 2:
             self.underlying = args[0]
+            self.sources = []
             self.gloss = args[1]
+            self.citationform = self
         else:
             raise TypeError
 
     def __add__(self, other):
         if isinstance(other, Word):
-            return Word(self.underlying + "+" + other.underlying,
-                        self.gloss + "+" + other.gloss)
+            out = Word(self.underlying + "+" + other.underlying,
+                       self.gloss + "+" + other.gloss)
+            out.sources = [self, other]
+            return out
 
     def __mul__(self, other):
         if isinstance(other, Word):
-            return Word(self.underlying + " " + other.underlying,
-                        self.gloss + " " + other.gloss)
+            out = Word(self.underlying + " " + other.underlying,
+                       self.gloss + " " + other.gloss)
+            out.sources = [self, other]
+            return out
 
     def __str__(self):
         abbrstr = ""
         if self.phonemic != self.phonetic:
-            abbrstr += "<span class='tooltipline'>[{}]</span> ".format(self.phonetic)
-        abbrstr += "<span class='tooltipline'>/{}/</span> ".format(self.phonemic)
-        abbrstr += "<span class='tooltipline'>*{}*</span> ".format(self.gloss)
-        return "<span class='tooltip'>{0}</span><span class='tooltiptext'>{1}</span>".format(self.surface, abbrstr, self.gloss)
+            abbrstr += "<span class='tooltipline ipa'>[{}]</span> ".format(self.phonetic)
+        abbrstr += "<span class='tooltipline ipa'>/{}/</span> ".format(self.phonemic)
+        abbrstr += "<span class='tooltipline ipa'>{}</span> ".format(self.gloss)
+        abbrstr += "<span class='tooltipline lexentry'><b>{}</b>".format(self.citationform.citation.capitalize())
+        if self.sources:
+            abbrstr += " (from "
+            for source in self.sources:
+                abbrstr += "<b>{}</b> <i>{}</i>, ".format(source.surface, source.gloss)
+            abbrstr += ")" 
+        abbrstr += " <i>{}</i>.</span>".format(self.citationform.gloss)
+        out = "<span class='tooltip'>{0}</span><span class='tooltiptext'>{1}</span>".format(self.surface, abbrstr)
+        return out
     
     def __repr__(self):
         return "<{} {} {} {}>".format(type(self), self.surface, self.underlying, self.gloss)
+
+    @property
+    def citation(self):
+        return self.surface
 
     @property
     def surface(self):
@@ -110,13 +132,20 @@ class Word():
 
 
 class Noun(Word):
-    ...
+    @property
+    def citation(self):
+        return (self-INDEF).surface
 
 class Adjective(Word):
     ...
 
 class Verb(Word):
-    ...
+    @property
+    def citation(self):
+        out = (self-INDIC).surface
+        if self.underlying[-1] not in V:
+            out += ", " + (self-IMP).surface
+        return out
 
 class Suffix():
     def __init__(self, process, gloss, concatenative=None):
@@ -140,8 +169,33 @@ class Suffix():
         if isinstance(other, Word):
             stem = other.underlying + "-" + self.process(other.underlying)
             gloss = other.gloss + "-" + self.gloss
-            return Word(stem, gloss)
+            w = Word(stem, gloss)
+            w.sources = other.sources
+            w.citationform = other.citationform
+            return w
 
 
 
 
+IMP = Suffix.fixed("ku7", "IMP")
+def INDICify(stem):
+    if stem[-1] in V:
+        return ""
+    else:
+        return "a"
+INDIC = Suffix.variable(INDICify, "INDIC")
+PSUBJ = Suffix.fixed("sa", "POS.SUBJ")
+NSUBJ = Suffix.fixed("si", "POS.SUBJ")
+CON = Suffix.fixed("i", "CON")
+def INDEFify(stem):
+    if stem[-1] in V:
+        return ""
+    else:
+        return "a"
+INDEF = Suffix.variable(INDEFify, "INDEF")
+def DEFify(stem):
+    if stem[-1] in V:
+        return "7"
+    else:
+        return "iu:"
+DEF = Suffix.variable(DEFify, "DEF")

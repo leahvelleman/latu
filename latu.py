@@ -1,6 +1,7 @@
 from jinja2 import Environment, Template
 import markdown
 from lexicon import lexicon
+from grammar import IMP, CON, INDEF, INDIC, PSUBJ
 
 env = Environment()
 env.filters['f'] = lambda w: "{} *{}*".format(str(w), w.gloss)
@@ -16,7 +17,8 @@ template = env.from_string("""
 </style>
 {}
 """.format(style, bodytext))
-text = template.render(**lexicon.__dict__)
+text = template.render(**lexicon.__dict__, IMP=IMP, CON=CON, INDEF=INDEF,
+        INDIC=INDIC, PSUBJ=PSUBJ)
 html = markdown.markdown(text, extensions=['tables', 'admonition', 'smarty'])
 
 with open('latu.html', 'w') as f:

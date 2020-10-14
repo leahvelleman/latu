@@ -5,6 +5,11 @@ body {
   margin-left: 50px;
 }
 
+.ipa {
+  font-family: "Courier New";
+}
+
+
 .admonition {
   margin: 0 -16px;
   border-radius: 6px;
@@ -70,3 +75,8 @@ margin-left: 10px;
 table {
 margin-left: 50px;
 }
+
+.lexentry {
+    margin-top: 2em;
+}
+

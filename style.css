@@ -1,0 +1,72 @@
+body {
+  font-family: "Charter";
+  line-height: 1.5;
+  width: 500px;
+  margin-left: 50px;
+}
+
+.admonition {
+  margin: 0 -16px;
+  border-radius: 6px;
+  border: 3px solid #369;
+  background-color: #CEF;
+}
+
+.admonition p {
+  padding: 0 16px;
+}
+
+.admonition-title {
+    display: block;
+font-size: 2em;
+margin-top: 0.67em;
+margin-bottom: 0.67em;
+margin-left: 0;
+margin-right: 0;
+font-weight: bold;
+}
+
+.tooltip {
+  font-weight: bold;
+  border-bottom: 1px dotted #369;
+}
+
+.tooltiptext {
+font-family: "Charter";
+  visibility: hidden;
+  --aside-offset: 1rem;
+  --aside-offset-lineheight: 1.5rem;
+  margin-bottom: calc(var(--padding) * 2);
+  padding: var(--padding);
+  position: absolute;
+  left: 600px;
+  width: var(--aside-width);
+  border-radius: calc(var(--padding)/4);
+  max-width: 100%;
+  padding: 16px;
+  margin: -16px;
+}
+
+.tooltipline {
+  position: relative;
+  display: block;
+}
+
+.tooltipline::after {
+  content: "\a";
+  white-space: pre;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover + .tooltiptext  {
+  visibility: visible;
+}
+
+ul li {
+list-style: none;
+margin-left: 10px;
+}
+
+table {
+margin-left: 50px;
+}

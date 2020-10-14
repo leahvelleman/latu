@@ -6,7 +6,7 @@ class lexicon():
     daytime = Noun(time+day, "daytime")
 
 
-    sit = Verb("hehde", "sit")
+    sit = Verb("he7te", "sit")
     clawCL = Noun("ka", "claw.CL")
     perch = Verb(sit*clawCL, "perch")
 

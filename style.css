@@ -5,6 +5,7 @@ body {
   margin-left: 50px;
 }
 
+
 .ipa {
   font-family: "Courier New";
 }
@@ -36,21 +37,37 @@ font-weight: bold;
   border-bottom: 1px dotted #369;
 }
 
-.tooltiptext {
-font-family: "Charter";
-  visibility: hidden;
-  --aside-offset: 1rem;
-  --aside-offset-lineheight: 1.5rem;
-  margin-bottom: calc(var(--padding) * 2);
-  padding: var(--padding);
-  position: absolute;
-  left: 600px;
-  width: var(--aside-width);
-  border-radius: calc(var(--padding)/4);
-  max-width: 100%;
-  padding: 16px;
-  margin: -16px;
+    .tooltiptext {
+    font-family: "Charter";
+      visibility: hidden;
+      --aside-offset: 1rem;
+      --aside-offset-lineheight: 1.5rem;
+      margin-bottom: calc(var(--padding) * 2);
+      padding: var(--padding);
+      position: absolute;
+      left: 600px;
+      width: var(--aside-width);
+      border-radius: calc(var(--padding)/4);
+      max-width: 100%;
+      padding: 16px;
+      margin: -16px;
+  }
+
+@media only screen and (max-width: 500px) {
+  .tooltiptext {
+    font-family: "Charter";
+    visibility: hidden;
+    position: absolute;
+    margin: 0 -16px;
+    border-radius: 6px;
+    border: 3px solid #369;
+    background-color: white;
+    line-height: 1.5;
+    left: 50px;
+    transform: translateY(3em);
+  }
 }
+
 
 .tooltipline {
   position: relative;

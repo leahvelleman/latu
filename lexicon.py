@@ -1,5 +1,6 @@
 from grammar import Word, Noun, Verb, Adjective, Suffix
 
+V = "aeiouy:"
 class lexicon():
     time = Noun("let", "time")
     day = Noun("iku", "day")
@@ -14,9 +15,9 @@ class lexicon():
     then = Word("’e", "then")
     will = Verb("wo:", "will")
     go = Verb("tys", "go")
-    information = Noun("Wjabju:", "information")
+    information = Noun("Wjabik", "information")
     more = Adjective("niosah", "more")
-    word = Noun("tja7a", "word")
+    word = Noun("a7at", "word")
     have = Verb("syi", "have")
     line = Noun("tihdinja", "line")
     dot = Noun("sihlihte", "dot")
@@ -46,12 +47,22 @@ class lexicon():
     fire = Noun("ah", "fire")
     foot = Noun("We7", "foot")
 
-    IMP = Suffix.fixed("ku", "IMP")
-    INDEF = Suffix.fixed("a", "IND")
-    INDIC = Suffix.fixed("a", "IND")
+    IMP = Suffix.fixed("ku7", "IMP")
+    def INDICify(stem):
+        if stem[-1] in V:
+            return ""
+        else:
+            return "a"
+    INDIC = Suffix.variable(INDICify, "INDIC")
     PSUBJ = Suffix.fixed("sa", "POS.SUBJ")
     NSUBJ = Suffix.fixed("si", "POS.SUBJ")
     CON = Suffix.fixed("i", "CON")
+    def INDEFify(stem):
+        if stem[-1] in V:
+            return ""
+        else:
+            return "a"
+    INDEF = Suffix.variable(INDEFify, "INDEF")
     def DEFify(stem):
         if stem[-1] in V:
             return "7"

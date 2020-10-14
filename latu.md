@@ -1,7 +1,7 @@
 # Latu
 
 !!! note
-    {{ perch-IMP }} {{ on }} {{ word-CON }} {{ have }} {{ line-CON }} 
+    {{ perch-IMP }} {{ on }} {{ word-CON }} {{ have-PSUBJ }} {{ line-CON }} 
     {{ dot-INDEF }} {{ below }} {{ and }} {{ then }} {{ will-INDIC }} 
     {{ go-PSUBJ }} {{ information-CON }} {{ more }}.
 

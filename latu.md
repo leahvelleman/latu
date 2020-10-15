@@ -1,4 +1,5 @@
-# Latu
+# *Kitsani Latu’* / The Latu language
+
 
 !!! note
     {{ perch-IMP }} {{ on }} {{ word-CON }} {{ have-PSUBJ }} {{ line-CON }} 
@@ -7,8 +8,9 @@
 
     *Hover over words that have a dotted line under them for more information.*
 
-# Phonology
-## Vowels 
+
+## Phonology
+### Vowels 
 
 There are six basic vowels: the five cardinal vowels, spelled **a e i o u,**
 and /1/, spelled **y.** All six occur both short and long, and written with
@@ -40,7 +42,7 @@ Roots often have two identical vowels, like the examples in this section.
 Another common pattern is an **i** in the first syllable and a diphthong
 in the second.
 
-## Consonants
+### Consonants
 
 There are fourteen consonant phonemes. 
 
